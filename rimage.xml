@@ -7,11 +7,19 @@
 	<license>GNU General Public License</license>
 	<authorEmail>info@reach.gr</authorEmail>
 	<authorUrl>http://www.reach.gr</authorUrl>
-	<version>1</version>
+	<version>1.0.1</version>
 	<description>RHelper Class:
 		The system plugin loads the rImage classes Joomla-wide. You can also add the parameter &amp;rimage=regen in the admin area to regenerate all images.
 	</description>
 	<files>
 		<filename plugin="rimage">rimage.php</filename>
 	</files>
+	<config>
+		<fields name="params">
+			<field name="showregen" type="radio" default="0" label="Show regenerate button" description="Show a button in K2 item edit view to regenerate images.">
+				<option value="0">Yes</option>
+				<option value="1">No</option>
+			</field>
+	    </fields>
+	</config>
 </extension>
