@@ -13,13 +13,16 @@
 	</description>
 	<files>
 		<filename plugin="rimage">rimage.php</filename>
+		<folder>assets</folder>
 	</files>
 	<config>
 		<fields name="params">
+			<fieldset name="basic" >
 			<field name="showregen" type="radio" default="0" label="Show regenerate button" description="Show a button in K2 item edit view to regenerate images.">
 				<option value="0">Yes</option>
 				<option value="1">No</option>
-			</field>
-	    </fields>
-	</config>
+			</field>			
+			</fieldset>
+		</fields>
+	</config> 
 </extension>

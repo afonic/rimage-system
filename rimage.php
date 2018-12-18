@@ -6,10 +6,10 @@ jimport( 'joomla.plugin.plugin' );
 
 class plgSystemRImage extends JPlugin
 {
-    function __construct(&$subject, $params)
-    {
-        parent::__construct($subject, $params);
-    }
+    // function __construct(&$subject, $params)
+    // {
+    //     parent::__construct($subject, $params);
+    // }
 
     function onAfterInitialise() {
     	// Include the autoloader for the plugin
@@ -35,9 +35,11 @@ class plgSystemRImage extends JPlugin
     }
 
     function onRenderAdminForm(&$item, $type, $tab = '') {
-        $app = JFactory::getApplication();
-        if (($item->id) && ($type == 'item') && ($tab == 'content')) {
-            $this->render($item);
+        if ($this->params['showregen'] != '1') {
+            $app = JFactory::getApplication();
+            if (($item->id) && ($type == 'item') && ($tab == 'content')) {
+                $this->render($item);
+            }
         }
     }
 
