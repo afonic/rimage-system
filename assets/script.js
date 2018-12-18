@@ -13,6 +13,7 @@ jQuery(document).ready(function($) {
 		$("#toolbar").append(html);
 
 		$('#rimage-regen').click(function() {
+			$(this).attr("disabled", true);
 			var r = $('#rimage-options');
 			jQuery.ajax({
 				method: "POST",
@@ -21,6 +22,7 @@ jQuery(document).ready(function($) {
 			})
 			.done(function() {
 				$('#toolbar').notify("Images have been sucessfully regenerated.", {className: "success", elementPosition: "bottom center"});
+				$('#rimage-regen').attr("disabled", false);
 			})
 			.error(function() {
 				$('#toolbar').notify("Images have NOT been sucessfully regenerated. Please contact admin.", {className: "error", elementPosition: "bottom center"});
