@@ -30,7 +30,7 @@ jQuery(document).ready(function($) {
 						$('.modal-footer').notify("Images have been sucessfully reordered.", {className: "success", elementPosition: "bottom center"});
 					})
 					.error(function() {
-						sortable.option("disabled", true);
+						sortable.option("disabled", false);
 						$('.modal-footer').notify("Images have NOT been sucessfully reordered. Please contact admin.", {className: "error", elementPosition: "bottom center"});
 					});
 				}

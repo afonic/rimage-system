@@ -26,6 +26,8 @@ class plgSystemRImage extends JPlugin
             if ($id && $catid) {
                 $regenerator = new Reach\rImageForceRegeneration;
                 $regenerator->regenerateSingle($id, $catid, $gallery);
+                echo new JResponseJson();
+                jexit();
             }
         }        
 
@@ -33,7 +35,18 @@ class plgSystemRImage extends JPlugin
             $id = $app->input->get('rid');
             $order = $app->input->get('rdata', null, PATH);
             if ($id && $order) {
-                $this->saveOrderJson($id, $order);
+                try
+                {
+                    $this->saveOrderJson($id, $order);
+                    echo new JResponseJson();
+                    jexit();
+                }
+                catch(Exception $e)
+                {
+                    header("HTTP/1.0 500 Error");
+                    echo new JResponseJson($e);
+                    jexit();
+                }
             }
         }
     }
@@ -113,7 +126,7 @@ class plgSystemRImage extends JPlugin
     }
 
     function saveOrderJson($id, $order) {
-        $path = $this->getDir($id).'order.json';
+        $path = $this->getDir($id).'/order.json';
         $json_data = json_encode($order);
 
         if (file_exists($path)) {
@@ -121,10 +134,10 @@ class plgSystemRImage extends JPlugin
         }
 
         if (!file_put_contents($path, $json_data)) {
-            JFactory::getApplication()->enqueueMessage("Couldn't write JSON file! Are you sure the path is correct?", 'error');
+            throw new Exception('Cannot write file.');
         }
         else {
-            JFactory::getApplication()->enqueueMessage("JSON generation OK.", 'message');
+            return true;
         }
     }
 
