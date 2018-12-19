@@ -21,6 +21,10 @@
 			<field name="showregen" type="radio" default="0" label="Show regenerate button" description="Show a button in K2 item edit view to regenerate images.">
 				<option value="0">Yes</option>
 				<option value="1">No</option>
+			</field>				
+			<field name="showorder" type="radio" default="0" label="Enable gallery ordering" description="Enable a popup to reorder a gallery.">
+				<option value="0">Yes</option>
+				<option value="1">No</option>
 			</field>			
 			</fieldset>
 		</fields>
