@@ -36,7 +36,6 @@ class plgSystemRImage extends JPlugin
 
     function onRenderAdminForm(&$item, $type, $tab = '') {
         if ($this->params['showregen'] != '1') {
-            $app = JFactory::getApplication();
             if (($item->id) && ($type == 'item') && ($tab == 'content')) {
                 $this->render($item);
             }
