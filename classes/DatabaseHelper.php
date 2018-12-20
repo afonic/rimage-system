@@ -18,6 +18,13 @@ class DatabaseHelper {
             $item->gallery = '{gallery}'.$this->id.'{/gallery}';
             return \JFactory::getDbo()->updateObject('#__k2_items', $item, 'id');
         }
+    }	
+
+    public function deleteGalleryColumn() {
+        $item = new \stdClass();
+        $item->id = $this->id;
+        $item->gallery = '';
+        return \JFactory::getDbo()->updateObject('#__k2_items', $item, 'id');
     }
 
     protected function checkGalleryColumn() {

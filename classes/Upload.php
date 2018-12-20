@@ -23,7 +23,7 @@ class Upload {
         }
         move_uploaded_file($file['tmp_name'], $this->dir.$file['name']);
         $db = new DatabaseHelper($this->id);
-        $db->addGalleryColumn($this->id);
+        $db->addGalleryColumn();
         $order = new Order($this->id);
         $order->addToOrderArray($this->dir.$file['name']);
 	}

@@ -60,4 +60,9 @@ class Order {
         }
     }
 
+    public function removeOrderJson() {
+        $path = $this->dir.'/order.json';
+        unlink($path);
+    }
+
 }

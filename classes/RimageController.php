@@ -4,6 +4,7 @@ namespace Reach;
 
 use Reach\Order;
 use Reach\Upload;
+use Reach\Delete;
 use Reach\rImageForceRegeneration;
 
 class RimageController {
@@ -84,9 +85,8 @@ class RimageController {
         if ($id && $file) {
 	        try
 	        {
-	            unlink(JPATH_ROOT.$file);
-	            $order = new Order($id);
-	            $order->removeFromOrderArray($file);
+				$delete = new Delete($id);
+				$delete->handle($file);
 	            echo new \JResponseJson();
 	            jexit();
 	        }
