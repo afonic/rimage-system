@@ -39,20 +39,15 @@ class plgSystemRImage extends JPlugin
     }
 
     function renderRegenerate($item) {
-        $options = array();
-        $options[] = 'data-id="'.$item->id.'"';
-        $options[] = 'data-category="'.$item->catid.'"';
-        $options[] = 'data-rtoken="'.JSession::getFormToken().'"';
-        if ($item->gallery) {
-            $options[] = 'data-gallery="yes"';
-        }
-        echo '<div id="rimage-options" '.implode(' ', $options).' style="display: none"></div>';
+        $views = new Views($item);
+        echo $views->regenerateButton();
+        
         $doc = JFactory::getDocument();
         $doc->addScript('/plugins/system/rimage/assets/regen.js');
     }
 
     function renderManager($item) {
-        $views = new Views($item->id);
+        $views = new Views($item);
         echo $views->modal();
 
         $doc = JFactory::getDocument();

@@ -8,12 +8,14 @@ use Reach\rImageFiles;
 class Views {
 
 	protected $id;
+	protected $item;
 	protected $files;
 
-	function __construct($id) {
-		$this->id = $id;
-		$this->files = (new rImageFiles($id))->getFiles();
-		$this->dir = (new rImageFiles($id))->getDir();
+	function __construct($item) {
+		$this->id = $item->id;
+		$this->item = $item;
+		$this->files = (new rImageFiles($item->id))->getFiles();
+		$this->dir = (new rImageFiles($item->id))->getDir();
 	}
 	
 	protected function images() {
@@ -63,6 +65,17 @@ class Views {
           </div>
         </div>
         ';
+	}
+
+	public function regenerateButton() {
+		$options = array();
+        $options[] = 'data-id="'.$this->item->id.'"';
+        $options[] = 'data-category="'.$this->item->catid.'"';
+        $options[] = 'data-rtoken="'.\JSession::getFormToken().'"';
+        if ($this->item->gallery) {
+            $options[] = 'data-gallery="yes"';
+        }
+        return '<div id="rimage-options" '.implode(' ', $options).' style="display: none"></div>';
 	}
 
 }
