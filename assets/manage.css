@@ -18,11 +18,45 @@
 
 #rimage-manage .modal-body {
 	max-height: 600px !important;
-	min-height: 300px;
+	min-height: 500px;
 	overflow-y: scroll;
 	position: relative;
 	width: calc(100% - 1rem); 
 	padding: 0.5rem;
+}
+
+#rimage-manage .dropzone {
+	min-height: 400px;
+	border: 4px dashed #ffcd05;
+	background: #343434;
+	position: relative;
+}
+
+#rimage-manage .dropzone .dz-default {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	margin: 0;
+	width: 100%;
+	font-size: 24px;
+	color: #fff;
+	text-align: center;
+}
+
+#rimage-manage .dropzone .dz-preview.dz-image-preview {
+	background: #343434;
+}
+
+#rimage-manage [class^="icon-"]:not(.icon-delete), #rimage-manage [class*=" icon-"]:not(.icon-delete) {
+    border-radius: 3px 0 0 3px;
+    border-right: 1px solid #b3b3b3;
+    height: auto;
+    line-height: inherit;
+    margin: 0 6px 0 -10px;
+    opacity: 1;
+    text-shadow: none;
+    width: 28px;
+    z-index: -1;
 }
 
 .rthumbs-container {

@@ -16,7 +16,8 @@ jQuery(document).ready(function($) {
 			maxFilesize: 10,
 			parallelUploads: 1,
 			paramName: 'file',
-			acceptedFiles: 'image/*'
+			acceptedFiles: 'image/*',
+			dictDefaultMessage: 'Please click here or drop files to upload.'
 		};
 
 		$('#rimage-order-open').click(function() {

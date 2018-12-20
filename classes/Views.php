@@ -52,14 +52,14 @@ class Views {
                     <div class="upload-images-container">
                         <div class="dropzone" id="upload-images"></div>
                         <div class="upload-buttons">
-                            <button type="button" class="btn btn-success" onclick="Joomla.submitbutton(\'apply\');">Save and close</button>
-                            <button type="button" class="btn btn-error" id="upload-images-cancel">Cancel</button>
+                            <button type="button" class="btn btn-save" onclick="Joomla.submitbutton(\'apply\');"><span class="icon-save" aria-hidden="true"></span> Save & Close</button>
+                            <button type="button" class="btn btn-error" id="upload-images-cancel"><span class="icon-cancel" aria-hidden="true"></span> Cancel</button>
                             </div>
                     </div>  
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="add-images">Add images</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" id="add-images"><span class="icon-upload" aria-hidden="true"></span> Add images</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="icon-cancel" aria-hidden="true"></span> Close</button>
                 </div>
             </div>
           </div>
