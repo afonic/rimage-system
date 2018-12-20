@@ -1,6 +1,6 @@
 <?php
 
-namespace Reach;
+namespace Reach\RImage;
 
 // Helper functions for database calls
 class DatabaseHelper {

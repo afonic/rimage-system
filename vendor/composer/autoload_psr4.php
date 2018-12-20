@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Reach\\' => array($baseDir . '/classes'),
+    'Reach\\RImage\\' => array($baseDir . '/classes'),
 );

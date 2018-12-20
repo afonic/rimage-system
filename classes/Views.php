@@ -1,6 +1,6 @@
 <?php
 
-namespace Reach;
+namespace Reach\RImage;
 
 use Reach\rImageFiles;
 

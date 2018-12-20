@@ -1,5 +1,5 @@
 {
     "autoload": {
-        "psr-4": {"Reach\\": "classes/"}
+        "psr-4": {"Reach\\RImage\\": "classes/"}
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Reach;
+namespace Reach\RImage;
 
-use Reach\Order;
-use Reach\Upload;
-use Reach\Delete;
+use Reach\RImage\Order;
+use Reach\RImage\Upload;
+use Reach\RImage\Delete;
 use Reach\rImageForceRegeneration;
 
-class RimageController {
+class RImageController {
 
 	protected $app;
 	protected $task;

@@ -5,8 +5,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport( 'joomla.plugin.plugin' );
 require('vendor/autoload.php');
 
-use Reach\Views;
-use Reach\RimageController;
+use Reach\RImage\Views;
+use Reach\RImage\RImageController;
 
 class plgSystemRImage extends JPlugin
 {
@@ -16,7 +16,7 @@ class plgSystemRImage extends JPlugin
         require_once(JPATH_ROOT.'/plugins/k2/rimage/vendor/autoload.php');
         
         // Let the controller handle the nasty business
-        $controller = new RimageController(JFactory::getApplication(), JFactory::getUser());     
+        $controller = new RImageController(JFactory::getApplication(), JFactory::getUser());     
 
     }
 

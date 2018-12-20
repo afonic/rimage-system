@@ -1,10 +1,10 @@
 <?php
 
-namespace Reach;
+namespace Reach\RImage;
 
 use Reach\rImageFiles;
-use Reach\Order;
-use Reach\DatabaseHelper;
+use Reach\RImage\Order;
+use Reach\RImage\DatabaseHelper;
 
 // This handles an image upload
 class Upload {
