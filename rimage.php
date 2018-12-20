@@ -3,14 +3,19 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport( 'joomla.plugin.plugin' );
+require('vendor/autoload.php');
+
+use Reach\Views;
+use Reach\Order;
+use Reach\Upload;
 
 class plgSystemRImage extends JPlugin
 {
 
     function onAfterInitialise() {
-    	// Include the autoloader for the plugin
+    	// Include the autoloader for the plugins
         require_once(JPATH_ROOT.'/plugins/k2/rimage/vendor/autoload.php');
-
+        
         // Run the regenerator
         $app = JFactory::getApplication();
 
@@ -29,45 +34,96 @@ class plgSystemRImage extends JPlugin
                 echo new JResponseJson();
                 jexit();
             }
+        }
+
+        if ($app->isAdmin() and ($app->input->get('rimage') == 'upload')) {
+            $id = $app->input->get('rid');
+            $file = $app->input->files->get('file');
+            if ($id && $file) {
+                $this->handleUpload($id, $file);
+            }
         }        
+
+        if ($app->isAdmin() and ($app->input->get('rimage') == 'delete')) {
+            $id = $app->input->get('rid');
+            $file = $app->input->get('rfile', null, RAW);
+            if ($id && $file) {
+                $this->handleDelete($id, $file);
+            }
+        }
 
         if ($app->isAdmin() and ($app->input->get('rimage') == 'order')) {
             $id = $app->input->get('rid');
-            $order = $app->input->get('rdata', null, PATH);
+            $order = $app->input->get('rdata', null, RAW);
             if ($id && $order) {
-                try
-                {
-                    $this->saveOrderJson($id, $order);
-                    echo new JResponseJson();
-                    jexit();
-                }
-                catch(Exception $e)
-                {
-                    header("HTTP/1.0 500 Error");
-                    echo new JResponseJson($e);
-                    jexit();
-                }
+                $this->handleOrder($id, $order);
             }
+        }
+    }
+
+    function handleOrder($id, $array) {
+        try
+        {
+            $order = new Order($id);
+            $order->saveOrderJson($array);
+            echo new JResponseJson();
+            jexit();
+        }
+        catch (Exception $e)
+        {
+            header("HTTP/1.0 500 Error");
+            echo new JResponseJson($e);
+            jexit();
+        }
+    }        
+
+    function handleUpload($id, $file) {
+        try
+        {
+            $upload = new Upload($id);
+            $upload->handle($file);
+            echo new JResponseJson();
+            jexit();
+        }
+        catch (Exception $e)
+        {
+            header("HTTP/1.0 500 Error");
+            echo new JResponseJson($e);
+            jexit();
+        }
+    }    
+
+    function handleDelete($id, $file) {
+        try
+        {
+            unlink(JPATH_ROOT.$file);
+            $order = new Order($id);
+            $order->removeFromOrderArray($file);
+            echo new JResponseJson();
+            jexit();
+        }
+        catch (Exception $e)
+        {
+            header("HTTP/1.0 500 Error");
+            echo new JResponseJson($e);
+            jexit();
         }
     }
 
     function onRenderAdminForm(&$item, $type, $tab = '') {
         if (($item->id) && ($type == 'item') && ($tab == 'content')) {
-            if (($this->params['showregen'] != '1') || ($this->params['showorder'] != '1')) {
-                $this->renderNotify();
-            }
-            if ($this->params['showregen'] != '1') {            
+            $this->renderManager($item);
+            if ($item->gallery) {            
                 $this->renderRegenerate($item);            
             }
-            if ($item->gallery && ($this->params['showorder'] != '1')) {
-                $this->renderOrder($item);
-            }            
+            if (($this->params['hidesigpro'] != '1')) {
+                $document->addScriptDeclaration('
+                window.event("domready", function() {
+                    alert("An inline JavaScript Declaration");
+                });
+                ');
+            }
         }
-    }
-
-    function renderNotify() {
-        $doc = JFactory::getDocument();
-        $doc->addScript('/plugins/system/rimage/assets/notify.js');
     }
 
     function renderRegenerate($item) {
@@ -82,63 +138,17 @@ class plgSystemRImage extends JPlugin
         $doc->addScript('/plugins/system/rimage/assets/regen.js');
     }
 
-    function renderOrder($item) {
-        $files = $this->getImages($item->id);
-        $images = '';
-        foreach ($files as $file) {
-            $path = str_replace(JPATH_ROOT, '', $file->path);
-            $images .= '<div class="rthumb" data-id="'.$path.'"><img src="'.$path.'" /></div>'.PHP_EOL;
-        }
-        $modal = '
-        <div id="rimage-order" data-rid="'.$item->id.'" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Order Gallery">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header" style="padding: 16px">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Order gallery items</h4>
-                    <span>Drag to reorder, order is saved automatically.</span>
-                </div>
-                <div class="modal-body" style="width: calc(100% - 1rem); padding: 0.5rem">
-                    <div id="rthumbs" class="rthumbs-container">'.$images.'</div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-          </div>
-        </div>
-        ';
-        echo $modal;
+    function renderManager($item) {
+        $views = new Views($item->id);
+        echo $views->modal();
+
         $doc = JFactory::getDocument();
+        $doc->addScript('/plugins/system/rimage/assets/notify.js');
         $doc->addScript('/plugins/system/rimage/assets/sortable.js');
-        $doc->addScript('/plugins/system/rimage/assets/order.js');
-        $doc->addStylesheet('/plugins/system/rimage/assets/order.css');
-    }
-
-    function getImages($id) {
-        $files = new Reach\rImageFiles($id);
-        return $files->getFiles();
-    }    
-
-    function getDir($id) {
-        $files = new Reach\rImageFiles($id);
-        return $files->getDir();
-    }
-
-    function saveOrderJson($id, $order) {
-        $path = $this->getDir($id).'/order.json';
-        $json_data = json_encode($order);
-
-        if (file_exists($path)) {
-            unlink($path);
-        }
-
-        if (!file_put_contents($path, $json_data)) {
-            throw new Exception('Cannot write file.');
-        }
-        else {
-            return true;
-        }
+        $doc->addScript('/plugins/system/rimage/assets/dropzone.js');
+        $doc->addScript('/plugins/system/rimage/assets/manage.js');
+        $doc->addStylesheet('/plugins/system/rimage/assets/dropzone.css');
+        $doc->addStylesheet('/plugins/system/rimage/assets/manage.css');
     }
 
 }

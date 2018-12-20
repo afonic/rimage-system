@@ -1,0 +1,99 @@
+#rimage-manage {
+	display: none;
+}
+
+#rimage-manage h4 {
+	display: inline-block;
+	font-size: 20px;
+	padding-right: 1rem;
+}
+
+#rimage-manage .modal-body {
+	max-height: 600px !important;
+	min-height: 300px;
+	overflow-y: scroll;
+	position: relative;
+}
+
+.rthumbs-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.rthumbs-noimages {
+	text-align: center;
+	font-size: 18px;
+	margin: 1rem 0;
+	width: 100%;
+}
+
+.rthumb {
+	width: calc(25% - 1rem);
+	padding: 0.5rem;
+	overflow: hidden;
+	cursor: move;
+	position: relative;
+}
+
+.rthumb-image {
+    overflow: hidden;
+    max-height: 134px;
+}
+
+.rthumb-label {
+	border-top: 2px solid #ffcd05;
+	text-align: center;
+	background: #34A0B8;
+	padding: 0.5rem 0;
+}
+
+.rthumb-label span.name {
+	display: block;
+	font-size: 12px;
+	color: #fff;
+}
+
+.rthumb.sortable-ghost .rthumb-delete {
+	display: none;
+}
+
+.rthumb-delete {
+	position: absolute;
+	right: 0.5rem;
+	top: 0.5rem;
+	padding: 0.5rem;
+	text-align: center;
+	background: rgb(0,0,0, 0.8);
+	color: #fff;
+	cursor: pointer;
+}
+.rthumb-delete span {
+	margin-right: 0;
+}
+
+.upload-images-container {
+	position: absolute;
+	background: #fff;
+	max-height: 0;
+	opacity: 0;
+	visibility: hidden;
+	left: 0;
+	right: 0;
+	top: 0;
+	padding: 1rem;
+	background: #fff;
+	z-index: 100;
+	transition: 0.5s all;
+	height: 100%;
+}
+.upload-images-container.open {
+	max-height: 2000px;
+	opacity: 1;
+	visibility: visible;
+}
+
+.upload-buttons {
+	margin-top: 2rem;
+	text-align: center;
+}
+
