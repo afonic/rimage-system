@@ -8,11 +8,21 @@
 	padding-right: 1rem;
 }
 
+#rimage-manage .modal-header {
+	padding: 10px 16px;
+}
+
+#rimage-manage .modal-header .close {
+	line-height: 34px !important;
+}
+
 #rimage-manage .modal-body {
 	max-height: 600px !important;
 	min-height: 300px;
 	overflow-y: scroll;
 	position: relative;
+	width: calc(100% - 1rem); 
+	padding: 0.5rem;
 }
 
 .rthumbs-container {
@@ -38,23 +48,28 @@
 .rthumb-image {
     overflow: hidden;
     max-height: 134px;
+    transition: 0.5s max-height;
 }
 
 .rthumb-label {
 	border-top: 2px solid #ffcd05;
 	text-align: center;
-	background: #34A0B8;
-	padding: 0.5rem 0;
-}
-
-.rthumb-label span.name {
-	display: block;
-	font-size: 12px;
+	background: #343434;
+	padding: 0.5rem 0.75rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 	color: #fff;
+	font-size: 12px;
 }
 
-.rthumb.sortable-ghost .rthumb-delete {
-	display: none;
+.rthumb.sortable-chosen .rthumb-delete, .rthumb.sortable-chosen .rthumb-label {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.rthumb.sortable-chosen .rthumb-image {
+	max-height: 170px;
 }
 
 .rthumb-delete {
@@ -63,10 +78,13 @@
 	top: 0.5rem;
 	padding: 0.5rem;
 	text-align: center;
-	background: rgb(0,0,0, 0.8);
+	background: rgb(288,22,22, 0.60);
 	color: #fff;
+	border-bottom-left-radius: 10px;
 	cursor: pointer;
+	transition: 0.5s opacity, 0.5s visibility;
 }
+
 .rthumb-delete span {
 	margin-right: 0;
 }

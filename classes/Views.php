@@ -26,7 +26,7 @@ class Views {
                 $images .= '
                     <div class="rthumb" data-id="'.$path.'">
                         <div class="rthumb-image"><img src="'.$path.'" /></div>
-                        <div class="rthumb-label"><span class="name">'.$name.'</span></div>
+                        <div class="rthumb-label">'.$name.'</div>
                         <div class="rthumb-delete"><span class="icon-delete"></span></div>
                     </div>
                     '.PHP_EOL;
@@ -40,12 +40,12 @@ class Views {
         <div id="rimage-manage" data-rid="'.$this->id.'" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Order Gallery">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header" style="padding: 16px">
+                <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Manage gallery</h4>
                     <span>Drag to reorder, order is saved automatically.</span>
                 </div>
-                <div class="modal-body" style="width: calc(100% - 1rem); padding: 0.5rem">
+                <div class="modal-body">
                     <div id="rthumbs" class="rthumbs-container">'.$this->images().'</div>
                     <div class="upload-images-container">
                         <div class="dropzone" id="upload-images"></div>
