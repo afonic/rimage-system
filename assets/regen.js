@@ -12,10 +12,11 @@ jQuery(document).ready(function($) {
 		$('#rimage-regen').click(function() {
 			$(this).attr("disabled", true);
 			var r = $('#rimage-options');
+			var token = r.data('rtoken');
 			jQuery.ajax({
 				method: "POST",
 				url: '/administrator/index.php',
-				data: { rimage: 'item', rid: r.data('id'), rcatid: r.data('category'), rgallery: r.data('gallery') }
+				data: { rimage: 'regenitem', rid: r.data('id'), rcatid: r.data('category'), rgallery: r.data('gallery'), [token]: 1 }
 			})
 			.done(function() {
 				$('#toolbar').notify("Images have been sucessfully regenerated.", {className: "success", elementPosition: "bottom center"});

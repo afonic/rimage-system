@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
 
 		Dropzone.options.uploadImages =
 		{
-			url: '/administrator/index.php?rimage=upload&rid='+$('#rimage-manage').data('rid'),
+			url: '/administrator/index.php?rimage=upload&rid='+$('#rimage-manage').data('rid')+'&'+$('#rimage-manage').data('rtoken')+'=1',
 			maxFilesize: 10,
 			parallelUploads: 1,
 			paramName: 'file',
@@ -29,11 +29,13 @@ jQuery(document).ready(function($) {
 				store: {
 				set: function (sortable) {
 					var order = sortable.toArray();
+					var r = $('#rimage-manage');
+					var token = r.data('rtoken');
 					sortable.option("disabled", true);
 					jQuery.ajax({
 						method: "POST",
 						url: '/administrator/index.php',
-						data: { rimage: 'order', rid: $('#rimage-manage').data('rid'), rdata: order}
+						data: { rimage: 'order', rid: r.data('rid'), rdata: order, [token]: 1}
 					})
 					.done(function() {
 						sortable.option("disabled", false);
@@ -68,11 +70,13 @@ jQuery(document).ready(function($) {
 	    $('.rthumb-delete').click(function() {
 	    	var file = $(this).parent().data('id');
 	    	var parent = $(this).parent();
+			var r = $('#rimage-manage');
+			var token = r.data('rtoken');
 	    	if (confirm("This cannot be undone, are you sure?")) {
 		        jQuery.ajax({
 					method: "POST",
 					url: '/administrator/index.php',
-					data: {rimage: 'delete', rid: $('#rimage-manage').data('rid'), rfile: file}
+					data: {rimage: 'delete', rid: r.data('rid'), rfile: file, [token]: 1}
 				})
 				.done(function() {
 					$('.modal-footer').notify("Image has been deleted. Please save the article to regen gallery.", {className: "warn", elementPosition: "top center"});
