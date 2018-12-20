@@ -117,9 +117,11 @@ class plgSystemRImage extends JPlugin
                 $this->renderRegenerate($item);            
             }
             if (($this->params['hidesigpro'] != '1')) {
-                $document->addScriptDeclaration('
-                window.event("domready", function() {
-                    alert("An inline JavaScript Declaration");
+                $doc = JFactory::getDocument();
+                $doc->addScriptDeclaration('
+                jQuery(document).ready(function($) {
+                    $("li#tabImageGallery").remove();
+                    $("#k2TabImageGallery").remove();
                 });
                 ');
             }
