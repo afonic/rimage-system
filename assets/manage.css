@@ -1,11 +1,23 @@
 #rimage-manage {
 	display: none;
+	top: 3%;
+	width: 95%;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
 }
 
 #rimage-manage h4 {
 	display: inline-block;
 	font-size: 20px;
 	padding-right: 1rem;
+}
+
+#rimage-manage .modal-content {
+	height: 92vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 #rimage-manage .modal-header {
@@ -17,12 +29,12 @@
 }
 
 #rimage-manage .modal-body {
-	max-height: 600px !important;
-	min-height: 500px;
+	max-height: calc(92vh - 120px);
 	overflow-y: scroll;
 	position: relative;
 	width: calc(100% - 1rem); 
 	padding: 0.5rem;
+	flex: 1 0 auto;
 }
 
 #rimage-manage .dropzone {
@@ -81,7 +93,7 @@
 
 .rthumb-image {
     overflow: hidden;
-    max-height: 134px;
+    max-height: 190px;
     transition: 0.5s max-height;
 }
 
@@ -103,7 +115,7 @@
 }
 
 .rthumb.sortable-chosen .rthumb-image {
-	max-height: 170px;
+	max-height: 230px;
 }
 
 .rthumb-delete {
