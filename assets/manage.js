@@ -21,6 +21,12 @@ jQuery(document).ready(function($) {
 
         $('#rimage-manage-open').click(function() {
             $('#rimage-manage').modal('toggle');
+            $('.rthumb-image img').each(function() {
+                if ($(this).data('src')) {
+                    $(this).attr('src', $(this).data('src'));
+                    $(this).data('src', null);
+                }                
+            });
         });
 
         var sortable = Sortable.create(rthumbs, { 

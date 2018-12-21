@@ -28,7 +28,7 @@ class Views {
                 $name = str_replace($this->dir, '', $file->path);
                 $images .= '
                     <div class="rthumb" data-id="'.$path.'">
-                        <div class="rthumb-image"><img src="'.$path.'" /></div>
+                        <div class="rthumb-image"><img data-src="'.$path.'" src="/plugins/system/rimage/assets/empty.png" /></div>
                         <div class="rthumb-label">'.$name.'</div>
                         <div class="rthumb-delete"><span class="icon-delete"></span></div>
                     </div>
