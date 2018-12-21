@@ -9,15 +9,15 @@ use Reach\RImage\DatabaseHelper;
 // This handles an image upload
 class Upload {
 
-	protected $id;
-	protected $dir;
+    protected $id;
+    protected $dir;
 
-	function __construct($id) {
-		$this->id = $id;
-		$this->dir = (new rImageFiles($id))->getDir();
-	}
+    function __construct($id) {
+        $this->id = $id;
+        $this->dir = (new rImageFiles($id))->getDir();
+    }
 
-	public function handle($file) {
+    public function handle($file) {
         if (! is_dir($this->dir)) {
             mkdir($this->dir);
         }
@@ -26,7 +26,7 @@ class Upload {
         $db->addGalleryColumn();
         $order = new Order($this->id);
         $order->addToOrderArray($this->dir.$file['name']);
-	}
+    }
 
 
 }

@@ -5,20 +5,20 @@ namespace Reach\RImage;
 // Helper functions for database calls
 class DatabaseHelper {
 
-	protected $id;
+    protected $id;
 
-	function __construct($id) {
-		$this->id = $id;
-	}
+    function __construct($id) {
+        $this->id = $id;
+    }
 
-	public function addGalleryColumn() {
+    public function addGalleryColumn() {
         if (! $this->checkGalleryColumn()) {
             $item = new \stdClass();
             $item->id = $this->id;
             $item->gallery = '{gallery}'.$this->id.'{/gallery}';
             return \JFactory::getDbo()->updateObject('#__k2_items', $item, 'id');
         }
-    }	
+    }
 
     public function deleteGalleryColumn() {
         $item = new \stdClass();

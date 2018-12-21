@@ -7,22 +7,22 @@ use Reach\rImageFiles;
 // This hackish class handles displaying some HTML at the backend
 class Views {
 
-	protected $id;
-	protected $item;
-	protected $files;
+    protected $id;
+    protected $item;
+    protected $files;
 
-	function __construct($item) {
-		$this->id = $item->id;
-		$this->item = $item;
-		$this->files = (new rImageFiles($item->id))->getFiles();
-		$this->dir = (new rImageFiles($item->id))->getDir();
-	}
-	
-	protected function images() {
-		$images = '<div class="rthumbs-noimages">No images. Add some!</div>';
+    function __construct($item) {
+        $this->id = $item->id;
+        $this->item = $item;
+        $this->files = (new rImageFiles($item->id))->getFiles();
+        $this->dir = (new rImageFiles($item->id))->getDir();
+    }
+
+    protected function images() {
+        $images = '<div class="rthumbs-noimages">No images. Add some!</div>';
         if ($this->files) {
             $images = '';
-            foreach ($this->files as $file) {                
+            foreach ($this->files as $file) {
                 $path = str_replace(JPATH_ROOT, '', $file->path);
                 $name = str_replace($this->dir, '', $file->path);
                 $images .= '
@@ -35,10 +35,10 @@ class Views {
             }
         }
         return $images;
-	}
+    }
 
-	public function modal() {
-		return '
+    public function modal() {
+        return '
         <div id="rimage-manage" data-rid="'.$this->id.'" data-rtoken="'.\JSession::getFormToken().'" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Order Gallery">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -55,7 +55,7 @@ class Views {
                             <button type="button" class="btn btn-save" onclick="Joomla.submitbutton(\'apply\');"><span class="icon-save" aria-hidden="true"></span> Save & Close</button>
                             <button type="button" class="btn btn-error" id="upload-images-cancel"><span class="icon-cancel" aria-hidden="true"></span> Cancel</button>
                             </div>
-                    </div>  
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" id="add-images"><span class="icon-upload" aria-hidden="true"></span> Add images</button>
@@ -65,10 +65,10 @@ class Views {
           </div>
         </div>
         ';
-	}
+    }
 
-	public function regenerateButton() {
-		$options = array();
+    public function regenerateButton() {
+        $options = array();
         $options[] = 'data-id="'.$this->item->id.'"';
         $options[] = 'data-category="'.$this->item->catid.'"';
         $options[] = 'data-rtoken="'.\JSession::getFormToken().'"';
@@ -76,6 +76,6 @@ class Views {
             $options[] = 'data-gallery="yes"';
         }
         return '<div id="rimage-options" '.implode(' ', $options).' style="display: none"></div>';
-	}
+    }
 
 }

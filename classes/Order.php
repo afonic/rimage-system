@@ -7,13 +7,13 @@ use Reach\rImageFiles;
 // The class that handles the JSON file with the images order
 class Order {
 
-	protected $id;
-	protected $dir;
+    protected $id;
+    protected $dir;
 
-	function __construct($id) {
-		$this->id = $id;
-		$this->dir = (new rImageFiles($id))->getDir();
-	}
+    function __construct($id) {
+        $this->id = $id;
+        $this->dir = (new rImageFiles($id))->getDir();
+    }
 
     protected function getOrderArray() {
         $path = $this->dir.'/order.json';
@@ -29,7 +29,7 @@ class Order {
             return;
         }
         if (($key = array_search($file, $array)) !== false) {
-            array_splice($array, $key, 1);      
+            array_splice($array, $key, 1);
             return $this->saveOrderJson($array);
         }
     }

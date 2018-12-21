@@ -12,19 +12,19 @@ class plgSystemRImage extends JPlugin
 {
 
     function onAfterInitialise() {
-    	// Include the autoloader for the plugins
+        // Include the autoloader for the plugins
         require_once(JPATH_ROOT.'/plugins/k2/rimage/vendor/autoload.php');
-        
+
         // Let the controller handle the nasty business
-        $controller = new RImageController(JFactory::getApplication(), JFactory::getUser());     
+        $controller = new RImageController(JFactory::getApplication(), JFactory::getUser());
 
     }
 
     function onRenderAdminForm(&$item, $type, $tab = '') {
         if (($item->id) && ($type == 'item') && ($tab == 'content')) {
             $this->renderManager($item);
-            if ($item->gallery) {            
-                $this->renderRegenerate($item);            
+            if ($item->gallery) {
+                $this->renderRegenerate($item);
             }
             if (($this->params['hidesigpro'] != '1')) {
                 $doc = JFactory::getDocument();
@@ -41,7 +41,7 @@ class plgSystemRImage extends JPlugin
     function renderRegenerate($item) {
         $views = new Views($item);
         echo $views->regenerateButton();
-        
+
         $doc = JFactory::getDocument();
         $doc->addScript('/plugins/system/rimage/assets/regen.js');
     }
