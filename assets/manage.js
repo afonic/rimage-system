@@ -58,6 +58,7 @@ jQuery(document).ready(function($) {
 
         $('#add-images').click(function() {
             $('.upload-images-container').addClass('open');
+            $('.modal-body').scrollTop(0);
             $('.modal-body').css({'overflow-y': 'hidden'});
         });
 
