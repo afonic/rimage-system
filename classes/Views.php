@@ -40,7 +40,7 @@ class Views {
 
     public function modalManager() {
         return '
-        <div id="rimage-manage" data-rid="'.$this->id.'" data-rtoken="'.\JSession::getFormToken().'" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Manage Gallery">
+        <div id="rimage-manage" data-rid="'.$this->id.'" data-rtoken="'.\JSession::getFormToken().'" class="rimage-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="Manage Gallery">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -72,7 +72,7 @@ class Views {
         $pluginId = (new DatabaseHelper($this->id))->getK2PluginId();
         $url = \JURI::base().'index.php?option=com_plugins&task=plugin.edit&extension_id='.$pluginId;
         return '
-        <div id="rimage-plugin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Manage Plugin">
+        <div id="rimage-plugin" class="rimage-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="Manage Plugin">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
