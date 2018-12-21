@@ -1,4 +1,4 @@
-#rimage-manage {
+#rimage-manage, #rimage-plugin {
 	display: none;
 	top: 3%;
 	width: 95%;
@@ -7,24 +7,24 @@
 	right: 0;
 }
 
-#rimage-manage h4 {
+#rimage-manage h4, #rimage-plugin h4 {
 	display: inline-block;
 	font-size: 20px;
 	padding-right: 1rem;
 }
 
-#rimage-manage .modal-content {
+#rimage-manage .modal-content, #rimage-plugin .modal-content {
 	height: 92vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
-#rimage-manage .modal-header {
+#rimage-manage .modal-header, #rimage-plugin .modal-header {
 	padding: 10px 16px;
 }
 
-#rimage-manage .modal-header .close {
+#rimage-manage .modal-header .close, #rimage-plugin .modal-header .close {
 	line-height: 34px !important;
 }
 
@@ -34,6 +34,14 @@
 	position: relative;
 	width: calc(100% - 1rem); 
 	padding: 0.5rem;
+	flex: 1 0 auto;
+}
+
+#rimage-plugin .modal-body {
+	max-height: calc(92vh - 120px);
+	overflow: hidden;
+	position: relative;
+	width: 100%;
 	flex: 1 0 auto;
 }
 
@@ -69,6 +77,15 @@
     text-shadow: none;
     width: 28px;
     z-index: -1;
+}
+
+#rimage-plugin-iframe {
+	height: 100%;
+	opacity: 0;
+}
+
+#rimage-plugin-iframe header {
+	display: none;
 }
 
 .rthumbs-container {

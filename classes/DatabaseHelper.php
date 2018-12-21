@@ -39,6 +39,22 @@ class DatabaseHelper {
             return true;
         }
         return false;
+    }    
+
+    public function getK2PluginId() {
+        $db = \JFactory::getDbo();
+        $query = $db->getQuery(true);
+        $query->select('extension_id');
+        $query->from($db->quoteName('#__extensions'));
+        $query->where($db->quoteName('type')." LIKE ".$db->quote('plugin'));
+        $query->where($db->quoteName('element')." LIKE ".$db->quote('rimage'));
+        $query->where($db->quoteName('folder')." LIKE ".$db->quote('k2'));
+        $db->setQuery($query);
+        $result = $db->loadResult();
+        if ($result) {
+            return $result;
+        }
+        return false;
     }
 
 }

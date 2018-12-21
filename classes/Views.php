@@ -2,6 +2,7 @@
 
 namespace Reach\RImage;
 
+use Reach\RImage\DatabaseHelper;
 use Reach\rImageFiles;
 
 // This hackish class handles displaying some HTML at the backend
@@ -37,9 +38,9 @@ class Views {
         return $images;
     }
 
-    public function modal() {
+    public function modalManager() {
         return '
-        <div id="rimage-manage" data-rid="'.$this->id.'" data-rtoken="'.\JSession::getFormToken().'" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Order Gallery">
+        <div id="rimage-manage" data-rid="'.$this->id.'" data-rtoken="'.\JSession::getFormToken().'" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Manage Gallery">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,6 +60,30 @@ class Views {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" id="add-images"><span class="icon-upload" aria-hidden="true"></span> Add images</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="icon-cancel" aria-hidden="true"></span> Close</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        ';
+    }
+
+    public function modalPlugin() {
+        $pluginId = (new DatabaseHelper($this->id))->getK2PluginId();
+        $url = \JURI::base().'index.php?option=com_plugins&task=plugin.edit&extension_id='.$pluginId;
+        return '
+        <div id="rimage-plugin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Manage Plugin">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Plugin options</h4>
+                </div>
+                <div id="rimage-plugin-container" class="modal-body">
+                <iframe id="rimage-plugin-iframe" data-src="'.$url.'" src="about:blank">
+                </iframe>
+                </div>
+                <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="icon-cancel" aria-hidden="true"></span> Close</button>
                 </div>
             </div>

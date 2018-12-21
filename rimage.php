@@ -48,7 +48,8 @@ class plgSystemRImage extends JPlugin
 
     function renderManager($item) {
         $views = new Views($item);
-        echo $views->modal();
+        echo $views->modalManager();
+        echo $views->modalPlugin();
 
         $doc = JFactory::getDocument();
         $doc->addScript('/plugins/system/rimage/assets/notify.js');
