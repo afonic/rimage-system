@@ -12,7 +12,7 @@ class plgSystemRImage extends JPlugin
 {
 
     function onAfterInitialise() {
-        // Include the autoloader for the plugins
+        // Include the autoloader for the K2 plugin
         require_once(JPATH_ROOT.'/plugins/k2/rimage/vendor/autoload.php');
 
         // Let the controller handle the nasty business
@@ -41,6 +41,7 @@ class plgSystemRImage extends JPlugin
     function renderRegenerate($item) {
         $views = new Views($item);
         echo $views->regenerateButton();
+        echo $views->modalRegenerate();
 
         $doc = JFactory::getDocument();
         $doc->addScript('/plugins/system/rimage/assets/regen.js');

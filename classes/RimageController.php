@@ -5,6 +5,7 @@ namespace Reach\RImage;
 use Reach\RImage\Order;
 use Reach\RImage\Upload;
 use Reach\RImage\Delete;
+use Reach\RImage\DatabaseHelper;
 use Reach\rImageForceRegeneration;
 
 class RImageController {
@@ -15,7 +16,7 @@ class RImageController {
     protected $user;
     protected $validTasks;
 
-    function __construct($app, $user) {
+    public function __construct($app, $user) {
         $this->app = $app;
         $this->task = $app->input->get('rimage');
         $this->input = $app->input;
@@ -73,8 +74,19 @@ class RImageController {
 
     // Handle general regen
     protected function regen() {
-        $regenerator = new rImageForceRegeneration;
-        $regenerator->regenerate();
+        try
+        {
+            $helper = new DatabaseHelper;
+            $items = $helper->getItemsToRegenerate();
+            echo new \JResponseJson($items);
+            jexit();
+        }
+        catch (Exception $e)
+        {
+            header("HTTP/1.0 500 Error");
+            echo new \JResponseJson($e);
+            jexit();
+        }
     }
 
     // Handle file deletion

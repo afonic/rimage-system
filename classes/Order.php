@@ -10,7 +10,7 @@ class Order {
     protected $id;
     protected $dir;
 
-    function __construct($id) {
+    public function __construct($id) {
         $this->id = $id;
         $this->dir = (new rImageFiles($id))->getDir();
     }

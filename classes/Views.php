@@ -12,7 +12,7 @@ class Views {
     protected $item;
     protected $files;
 
-    function __construct($item) {
+    public function __construct($item) {
         $this->id = $item->id;
         $this->item = $item;
         $this->files = (new rImageFiles($item->id))->getFiles();
@@ -81,6 +81,33 @@ class Views {
                 </div>
                 <div id="rimage-plugin-container" class="modal-body">
                 <iframe id="rimage-plugin-iframe" data-src="'.$url.'" src="about:blank">
+                </iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="icon-cancel" aria-hidden="true"></span> Close</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        ';
+    }
+
+    public function modalRegenerate() {
+        return '
+        <div id="rimage-regenerate" class="rimage-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="Regenerate images">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Regenerate all images</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="message">Please note that this window regenerates <strong>ALL images in your website</strong>.
+                    It should be used when you have changed the image sets and need to regenerate everything. It is extremely
+                    resource intensive and should be used with care.<br>You are about to regenerate the images for <span class="total-to-regen" id="items-number"></span> items.</div>
+                    <button id="confirm-regenerate" type="button" class="btn btn-default"><span class="icon-loop" aria-hidden="true"></span> Confirm Regenerate All</button>
+                    <div id="regen-bar"><div id="regen-progress"></div></div>
+                    <div id="counter"><span class="current">0</span> / <span class="total-to-regen"></span></div>
                 </iframe>
                 </div>
                 <div class="modal-footer">
