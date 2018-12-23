@@ -116,7 +116,7 @@ class RImageController {
         $this->checkToken(true);
         $id = $this->input->get('rid');
         $file = $this->input->files->get('file');
-            if ($id && $file) {
+        if ($id && $file) {
             try
             {
                 $upload = new Upload($id);
