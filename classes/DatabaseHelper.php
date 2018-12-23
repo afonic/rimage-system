@@ -53,7 +53,7 @@ class DatabaseHelper
 
     /**
      * Check if the K2 item has a gallery tag.
-     * 
+     *
      * @return bool True if it has a gallery tag or false if it doesn't.
      */
     protected function checkGalleryColumn()
@@ -73,7 +73,7 @@ class DatabaseHelper
 
     /**
      * Get the ID of the K2 plugin from the extensions table.
-     * 
+     *
      * @return integer|bool The id of the plugin or false if it's not found.
      */
     public function getK2PluginId()
@@ -95,7 +95,7 @@ class DatabaseHelper
 
     /**
      * Get the IDs of the items that we need to regenerate.
-     * 
+     *
      * @return array The array of the items that need to regenerate.
      */
     public function getItemsToRegenerate()
@@ -122,7 +122,7 @@ class DatabaseHelper
 
     /**
      * Get the K2 categories that have items that are in item sets.
-     * 
+     *
      * @return array The array of categories.
      */
     protected function getCategoriesToRegenerate()
@@ -149,7 +149,7 @@ class DatabaseHelper
 
     /**
      * Returns all K2 categories that have a parent.
-     * 
+     *
      * @return mixed The object with the categories or null if the query failed.
      */
     protected function getChildK2Categories()
@@ -166,7 +166,7 @@ class DatabaseHelper
     
     /**
      * Get the configured image sets from the plugin's settings.
-     * 
+     *
      * @return array An assosiative array with the image sets.
      */
     protected function getItemSets()

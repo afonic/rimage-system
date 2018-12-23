@@ -6,13 +6,16 @@ use Reach\rImageFiles;
 use Reach\RImage\Order;
 use Reach\RImage\DatabaseHelper;
 
+/**
+ * The class that handles the delete of an image file.
+ */
 class Delete
 {
     protected $id;
     
     /**
      * Class contructor
-     * 
+     *
      * @param int $id The id of the K2 item
      */
     public function __construct($id)
@@ -22,9 +25,9 @@ class Delete
     
     /**
      * Handle the deletion
-     * 
+     *
      * @param string $file The path to the file
-     * 
+     *
      * @return bool
      */
     public function handle($file)

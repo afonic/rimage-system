@@ -39,10 +39,10 @@ class Order
 
     /**
      * Removes an image from the order array.
-     * 
+     *
      * @param string $file Image's path.
-     * 
-     * @return null|bool Returns null if the array is empty or true if it's saved. 
+     *
+     * @return null|bool Returns null if the array is empty or true if it's saved.
      */
     public function removeFromOrderArray($file)
     {
@@ -58,10 +58,10 @@ class Order
 
     /**
      * Add image to the orderarray.
-     * 
+     *
      * @param string $file Path to the image file.
      *
-     * @return null|bool Returns null if the array is empty or true if it's saved. 
+     * @return null|bool Returns null if the array is empty or true if it's saved.
      */
     public function addToOrderArray($file)
     {
@@ -76,11 +76,11 @@ class Order
 
     /**
      * Save the order at the JSON file.
-     * 
+     *
      * @param array $order The array to be saved.
      *
      * @throws Exception Throws an exception if it can't save.
-     * 
+     *
      * @return bool Returns true at save.
      */
     public function saveOrderJson($order)
@@ -101,7 +101,7 @@ class Order
 
     /**
      * Delete the order JSON file.
-     * 
+     *
      * @return null
      */
     public function removeOrderJson()

@@ -6,18 +6,34 @@ use Reach\rImageFiles;
 use Reach\RImage\Order;
 use Reach\RImage\DatabaseHelper;
 
-// This handles an image upload
-class Upload {
-
+/**
+ * This class handles the image upload.
+ */
+class Upload
+{
     protected $id;
     protected $dir;
 
-    public function __construct($id) {
+    /**
+     * Class constructor.
+     *
+     * @param int $id The id of the K2 item.
+     */
+    public function __construct($id)
+    {
         $this->id = $id;
         $this->dir = (new rImageFiles($id))->getDir();
     }
 
-    public function handle($file) {
+    /**
+     * Handle the image upload.
+     *
+     * @param array $file The array from the file upload
+     *
+     * @return null
+     */
+    public function handle($file)
+    {
         if (! is_dir($this->dir)) {
             mkdir($this->dir);
         }
@@ -27,6 +43,4 @@ class Upload {
         $order = new Order($this->id);
         $order->addToOrderArray($this->dir.$file['name']);
     }
-
-
 }
