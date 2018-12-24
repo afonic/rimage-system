@@ -6,16 +6,32 @@ use Reach\rImageFiles;
 use Reach\RImage\Order;
 use Reach\RImage\DatabaseHelper;
 
-// This handles an image upload
-class Delete {
-
+/**
+ * The class that handles the delete of an image file.
+ */
+class Delete
+{
     protected $id;
-
-    function __construct($id) {
+    
+    /**
+     * Class contructor
+     *
+     * @param int $id The id of the K2 item
+     */
+    public function __construct($id)
+    {
         $this->id = $id;
     }
-
-    public function handle($file) {
+    
+    /**
+     * Handle the deletion
+     *
+     * @param string $file The path to the file
+     *
+     * @return bool
+     */
+    public function handle($file)
+    {
         // Delete the file
         unlink(JPATH_ROOT.$file);
         $order = new Order($this->id);
@@ -26,6 +42,6 @@ class Delete {
             $db->deleteGalleryColumn();
             $order->removeOrderJson();
         }
+        return true;
     }
-
 }

@@ -5,21 +5,35 @@ namespace Reach\RImage;
 use Reach\RImage\DatabaseHelper;
 use Reach\rImageFiles;
 
-// This hackish class handles displaying some HTML at the backend
-class Views {
-
+/**
+ * This hackish class handles displaying some HTML at the backend.
+ */
+class Views
+{
     protected $id;
     protected $item;
     protected $files;
 
-    public function __construct($item) {
+    /**
+     * Class constructor.
+     *
+     * @param object $item The K2 item object.
+     */
+    public function __construct($item)
+    {
         $this->id = $item->id;
         $this->item = $item;
         $this->files = (new rImageFiles($item->id))->getFiles();
         $this->dir = (new rImageFiles($item->id))->getDir();
     }
 
-    protected function images() {
+    /**
+     * Renders a single image in the gallery popup.
+     * 
+     * @return string Some HTML. Don't judge.
+     */
+    protected function images()
+    {
         $images = '<div class="rthumbs-noimages">No images. Add some!</div>';
         if ($this->files) {
             $images = '';
@@ -38,7 +52,13 @@ class Views {
         return $images;
     }
 
-    public function modalManager() {
+    /**
+     * Renders the modal for the gallery popup.
+     * 
+     * @return string Some HTML. Don't judge.
+     */
+    public function modalManager()
+    {
         return '
         <div id="rimage-manage" data-rid="'.$this->id.'" data-rtoken="'.\JSession::getFormToken().'" class="rimage-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="Manage Gallery">
           <div class="modal-dialog modal-lg" role="document">
@@ -68,7 +88,13 @@ class Views {
         ';
     }
 
-    public function modalPlugin() {
+    /**
+     * Renders the modal for the plugin settings popup.
+     * 
+     * @return string Some HTML. Don't judge.
+     */
+    public function modalPlugin()
+    {
         $pluginId = (new DatabaseHelper($this->id))->getK2PluginId();
         $url = \JURI::base().'index.php?option=com_plugins&task=plugin.edit&extension_id='.$pluginId;
         return '
@@ -92,7 +118,13 @@ class Views {
         ';
     }
 
-    public function modalRegenerate() {
+    /**
+     * Renders the modal for the images regeneration.
+     * 
+     * @return string Some HTML. Don't judge.
+     */
+    public function modalRegenerate()
+    {
         return '
         <div id="rimage-regenerate" class="rimage-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="Regenerate images">
           <div class="modal-dialog modal-lg" role="document">
@@ -119,7 +151,13 @@ class Views {
         ';
     }
 
-    public function regenerateButton() {
+    /**
+     * Renders a helper div to contain the settings for the regenerate button.
+     * 
+     * @return string Some (hidden) HTML. Don't judge.
+     */
+    public function regenerateButton()
+    {
         $options = array();
         $options[] = 'data-id="'.$this->item->id.'"';
         $options[] = 'data-category="'.$this->item->catid.'"';
@@ -129,5 +167,4 @@ class Views {
         }
         return '<div id="rimage-options" '.implode(' ', $options).' style="display: none"></div>';
     }
-
 }

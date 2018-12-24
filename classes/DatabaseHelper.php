@@ -4,18 +4,32 @@ namespace Reach\RImage;
 
 use Reach\rImageDbHelper;
 
-// Helper functions for database calls
-class DatabaseHelper {
-
+/**
+ * Helper class for database queries.
+ */
+class DatabaseHelper
+{
     protected $id;
     protected $db;
 
-    public function __construct($id = null) {
+    /**
+     * Class constructor.
+     *
+     * @param int $id The K2 item's id, optional.
+     */
+    public function __construct($id = null)
+    {
         $this->id = $id;
         $this->db = \JFactory::getDbo();
     }
 
-    public function addGalleryColumn() {
+    /**
+     * Adds the required tag in K2 item's gallery column.
+     *
+     * @return bool True on success.
+     */
+    public function addGalleryColumn()
+    {
         if (! $this->checkGalleryColumn()) {
             $item = new \stdClass();
             $item->id = $this->id;
@@ -24,14 +38,26 @@ class DatabaseHelper {
         }
     }
 
-    public function deleteGalleryColumn() {
+    /**
+     * Delete the gallery tag text from the K2 item's gallery column.
+     *
+     * @return bool True on success.
+     */
+    public function deleteGalleryColumn()
+    {
         $item = new \stdClass();
         $item->id = $this->id;
         $item->gallery = '';
         return $this->db->updateObject('#__k2_items', $item, 'id');
     }
 
-    protected function checkGalleryColumn() {
+    /**
+     * Check if the K2 item has a gallery tag.
+     *
+     * @return bool True if it has a gallery tag or false if it doesn't.
+     */
+    protected function checkGalleryColumn()
+    {
         $db = $this->db;
         $query = $db->getQuery(true);
         $query->select('gallery');
@@ -43,9 +69,15 @@ class DatabaseHelper {
             return true;
         }
         return false;
-    }    
+    }
 
-    public function getK2PluginId() {
+    /**
+     * Get the ID of the K2 plugin from the extensions table.
+     *
+     * @return integer|bool The id of the plugin or false if it's not found.
+     */
+    public function getK2PluginId()
+    {
         $db = $this->db;
         $query = $db->getQuery(true);
         $query->select('extension_id');
@@ -61,8 +93,14 @@ class DatabaseHelper {
         return false;
     }
 
-    public function getItemsToRegenerate() {
-        $categories = implode(',',  $this->getCategoriesToRegenerate());
+    /**
+     * Get the IDs of the items that we need to regenerate.
+     *
+     * @return array The array of the items that need to regenerate.
+     */
+    public function getItemsToRegenerate()
+    {
+        $categories = implode(',', $this->getCategoriesToRegenerate());
         $db = $this->db;
         $query = $db->getQuery(true);
         $query->select($db->quoteName(array('id', 'catid', 'gallery')));
@@ -82,7 +120,13 @@ class DatabaseHelper {
         return $items;
     }
 
-    protected function getCategoriesToRegenerate() {
+    /**
+     * Get the K2 categories that have items that are in item sets.
+     *
+     * @return array The array of categories.
+     */
+    protected function getCategoriesToRegenerate()
+    {
         $sets = $this->getItemSets()['image-sets'];
         $childCategories = $this->getChildK2Categories();
         $categories = array();
@@ -95,7 +139,7 @@ class DatabaseHelper {
                     foreach ($childCategories as $child) {
                         if ((! in_array($child->id, $categories)) && ($child->parent == $catId)) {
                             $categories[] = $child->id;
-                        } 
+                        }
                     }
                 }
             }
@@ -103,8 +147,13 @@ class DatabaseHelper {
         return $categories;
     }
 
-    // Get all parent categories from database
-    protected function getChildK2Categories() {
+    /**
+     * Returns all K2 categories that have a parent.
+     *
+     * @return mixed The object with the categories or null if the query failed.
+     */
+    protected function getChildK2Categories()
+    {
         $db = $this->db;
         $query = $db->getQuery(true);
         $query->select($db->quoteName(array('id', 'parent')));
@@ -115,8 +164,13 @@ class DatabaseHelper {
         return $db->loadObjectList('id');
     }
     
-    // Get all item sets
-    protected function getItemSets() {
+    /**
+     * Get the configured image sets from the plugin's settings.
+     *
+     * @return array An assosiative array with the image sets.
+     */
+    protected function getItemSets()
+    {
         $db = $this->db;
         $query = $db->getQuery(true);
         $query->select($db->quoteName(array('params')));
@@ -126,5 +180,4 @@ class DatabaseHelper {
         $db->setQuery($query);
         return json_decode($db->loadResult(), true);
     }
-
 }
