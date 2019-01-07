@@ -3,13 +3,13 @@
 	<name>RImage</name>
 	<author>Reach</author>
 	<creationDate>May 2017</creationDate>
-	<copyright>Copyright (C) 2019 Reach Web Agency. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2017 Reach Web Agency. All rights reserved.</copyright>
 	<license>GNU General Public License</license>
 	<authorEmail>info@reach.gr</authorEmail>
 	<authorUrl>http://www.reach.gr</authorUrl>
-	<version>1.1.02</version>
-	<description>
-		RImage: Better image management for K2 and a modern Sigpro replacement.
+	<version>1.0.1</version>
+	<description>RHelper Class:
+		The system plugin loads the rImage classes Joomla-wide. You can also add the parameter &amp;rimage=regen in the admin area to regenerate all images.
 	</description>
 	<files>
 		<filename plugin="rimage">rimage.php</filename>
