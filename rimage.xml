@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="2.5" type="plugin" group="system" method="upgrade">
-	<name>RImage</name>
-	<author>Reach</author>
-	<creationDate>May 2017</creationDate>
-	<copyright>Copyright (C) 2017 Reach Web Agency. All rights reserved.</copyright>
-	<license>GNU General Public License</license>
-	<authorEmail>info@reach.gr</authorEmail>
-	<authorUrl>http://www.reach.gr</authorUrl>
-	<version>1.0.1</version>
-	<description>RHelper Class:
-		The system plugin loads the rImage classes Joomla-wide. You can also add the parameter &amp;rimage=regen in the admin area to regenerate all images.
-	</description>
-	<files>
-		<filename plugin="rimage">rimage.php</filename>
-		<folder>assets</folder>
-		<folder>classes</folder>
-		<folder>vendor</folder>
-	</files>
-	<config>
-		<fields name="params">
-			<fieldset name="basic" >
-				<field name="hidesigpro" type="radio" default="0" label="Hide Simple Image Gallery Pro" description="If selected this plugin will hide via Javascript the SIGPRO tab.">
-					<option value="0">Yes</option>
-					<option value="1">No</option>
-				</field>						
-			</fieldset>
-		</fields>
-	</config> 
+    <name>RImage</name>
+    <author>Reach</author>
+    <creationDate>May 2017</creationDate>
+    <copyright>Copyright (C) 2019 Reach Web Agency. All rights reserved.</copyright>
+    <license>GNU General Public License</license>
+    <authorEmail>info@reach.gr</authorEmail>
+    <authorUrl>http://www.reach.gr</authorUrl>
+    <version>1.1.02</version>
+    <description>
+        Better K2 image manipulation and a modern Sigpro replacement.
+    </description>
+    <files>
+        <filename plugin="rimage">rimage.php</filename>
+        <folder>assets</folder>
+        <folder>classes</folder>
+        <folder>vendor</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" >
+                <field name="hidesigpro" type="radio" default="0" label="Hide Simple Image Gallery Pro" description="If selected this plugin will hide via Javascript the SIGPRO tab.">
+                    <option value="0">Yes</option>
+                    <option value="1">No</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
 </extension>

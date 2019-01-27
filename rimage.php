@@ -3,7 +3,7 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.plugin.plugin');
-require 'vendor/autoload.php';
+require JPATH_ROOT.'/plugins/system/rimage/vendor/autoload.php';
 
 use Reach\RImage\Views;
 use Reach\RImage\RImageController;

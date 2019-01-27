@@ -5,6 +5,7 @@ namespace Reach\RImage;
 use Reach\rImageFiles;
 use Reach\RImage\Order;
 use Reach\RImage\DatabaseHelper;
+use Joomla\CMS\Helper\MediaHelper;
 
 /**
  * This class handles the image upload.
@@ -34,13 +35,23 @@ class Upload
      */
     public function handle($file)
     {
+        // Make sure filename is safe
+        $safeFileName = \JFile::makeSafe($file['name']);
+        // Abort if the file is not an image
+        if (! MediaHelper::isImage($safeFileName)) {
+            throw new \Exception("Not an image file extension!");
+        }
+        if (! getimagesize($file['tmp_name'])) {
+            throw new \Exception("Not a real image file!");
+        }
+        // Make the dir if needed
         if (! is_dir($this->dir)) {
             mkdir($this->dir);
         }
-        move_uploaded_file($file['tmp_name'], $this->dir.$file['name']);
+        move_uploaded_file($file['tmp_name'], $this->dir.$safeFileName);
         $db = new DatabaseHelper($this->id);
         $db->addGalleryColumn();
         $order = new Order($this->id);
-        $order->addToOrderArray($this->dir.$file['name']);
+        $order->addToOrderArray($this->dir.$safeFileName);
     }
 }
